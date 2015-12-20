@@ -1,9 +1,4 @@
----
-title: "Reproducible Research: Peer Assessment 1"
-output: 
-  html_document:
-    keep_md: true
----
+# Reproducible Research: Peer Assessment 1
 
 
 ## Loading and preprocessing the data
@@ -49,7 +44,7 @@ library(ggplot2)
 qplot(step_sums, geom="histogram") 
 ```
 
-![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-4-1.png) 
 
 ### Step 4: Calculating the median and the mean of the number of steps
 
@@ -58,7 +53,7 @@ steps_mean <- mean(step_sums, na.rm = TRUE)
 steps_median <- median(step_sums, na.rm = TRUE)
 ```
 
-The mean is 1.0766189 &times; 10<sup>4</sup> and the median is 10765.
+The mean is 1.0766189\times 10^{4} and the median is 10765.
 
 ## What is the average daily activity pattern?
 
@@ -81,11 +76,6 @@ library(data.table)
 ## Warning: package 'data.table' was built under R version 3.1.3
 ```
 
-```
-## data.table 1.9.4  For help type: ?data.table
-## *** NB: by=.EACHI is now explicit. See README to restore previous behaviour.
-```
-
 ```r
 steps_sums_as_table <- data.frame(steps_by_groups)
 average_steps_per_interval_across_days <- rowMeans(steps_sums_as_table, na.rm = TRUE)
@@ -93,13 +83,13 @@ ts_data <- ts(average_steps_per_interval_across_days, start = 1, end = 288)
 xyplot(ts_data, type = "l")
 ```
 
-![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-6-1.png) 
 
 ```r
-max_average_measure <- which.max(ts_data)
+max_average_measure <- max(ts_data)
 ```
 
-The highest number of steps are made on average in the 104th interval of the day. 
+The highest number of steps are made on average in the 206.1698113th interval of the day. 
 
 ## Imputing missing values
 

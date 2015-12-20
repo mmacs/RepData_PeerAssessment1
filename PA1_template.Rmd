@@ -57,7 +57,7 @@ steps_sums_as_table <- data.frame(steps_by_groups)
 average_steps_per_interval_across_days <- rowMeans(steps_sums_as_table, na.rm = TRUE)
 ts_data <- ts(average_steps_per_interval_across_days, start = 1, end = 288)
 xyplot(ts_data, type = "l")
-max_average_measure <- which.max(ts_data)
+max_average_measure <- max(ts_data)
 ```
 
 The highest number of steps are made on average in the `r max_average_measure`th interval of the day. 
@@ -76,22 +76,3 @@ There are `r number_of_nas` NA values in the dataset.
 
 The strategy is to replace all NAs with the average number of steps taken, averages across all days.
 
-### Step 3: Creating a new dataset with the missing values filled in.
-
-```{r results = "hide"}
-DF <- matrix(steps_sums_as_table, nrow = 288, ncol = 61)
-nas_replacer <- function(x,y) {
-  for (i in x) {
-    for (j in y) {
-      if (is.na(DF[i,j])) DF[i,j] <- average_steps_per_interval_across_days[i]
-    }
-  }
-}
-
-tidy_data <- nas_replacer(1:288, 1:61)
-
-```
-
-### Step 4: Making a histogram with new results.
-
-Oops I run out of time... And still gotta commit this file to Github!!
